@@ -3,7 +3,7 @@
 //
 
 import React from 'react';
-import { StyleSheet, View, Picker, Text, TouchableHighlight, } from 'react-native';
+import { StyleSheet, View, Picker, } from 'react-native';
 
 export default class BirthdayPicker extends React.Component {
   static defaultProps= {
