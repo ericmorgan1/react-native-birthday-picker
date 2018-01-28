@@ -10,9 +10,7 @@ export default class BirthdayPicker extends React.Component {
     selectedYear:   (new Date()).getFullYear(),     // Year to initialize the picker to (set to 0 to not have a year)
     selectedMonth:  (new Date()).getMonth(),        // Month to initialize the picker to
     selectedDay:    (new Date()).getDate(),         // Day to initailize the picker to
-
     yearsBack:      100,                            // How many years backwards (from starting year) you want to show
-    yearsForward:   0,                              // How many years forwards (from starting year) you want to show
 
     onYearValueChange: function(year, idx) { },     // Function called when year changes
     onMonthValueChange: function(month, idx) { },   // Function called when month changes
@@ -63,16 +61,20 @@ export default class BirthdayPicker extends React.Component {
 
   // Returns the <Picker.Item> values for the years...
   renderYearPickerItems() {
+    // If year was 0, change it to current...
+    var currentYear = (new Date()).getFullYear();
     var centerYear = this.startingYear;
-    if (centerYear === 0) { centerYear = (new Date()).getFullYear(); }
+    if (centerYear === 0) { centerYear = currentYear; }
+
+    // Set starting and ending years...
     var startYear = centerYear - this.props.yearsBack;
-    var endYear = centerYear + this.props.yearsForward;
+    var endYear = currentYear;
 
     var years = [];
     for (var i = startYear; i <= endYear; i++) {
       years.push(<Picker.Item label={i.toString()} value={i} key={i} />);
-      if (i == centerYear) { years.push(<Picker.Item label="----" value={0} key={0} />); }
     }
+    years.push(<Picker.Item label="----" value={0} key={0} />);
     return years;
   }
 
