@@ -10,6 +10,7 @@ export default class BirthdayPicker extends React.Component {
     selectedYear:   (new Date()).getFullYear(),     // Year to initialize the picker to (set to 0 to not have a year)
     selectedMonth:  (new Date()).getMonth(),        // Month to initialize the picker to
     selectedDay:    (new Date()).getDate(),         // Day to initailize the picker to
+
     yearsBack:      100,                            // How many years backwards (from starting year) you want to show
     yearsForward:   0,                              // How many years forwards (from starting year) you want to show
 
@@ -20,6 +21,8 @@ export default class BirthdayPicker extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.startingYear = this.props.selectedYear;
     this.state = {
       year:     this.props.selectedYear,
       month:    this.props.selectedMonth, 
@@ -29,7 +32,7 @@ export default class BirthdayPicker extends React.Component {
   
   componentWillReceiveProps(nextProps) {
     this.setState({
-      year: nextProps.year, month: nextProps.month, day: nextProps.day
+      year: nextProps.selectedYear, month: nextProps.selectedMonth, day: nextProps.selectedDay
     });
   }
 
@@ -60,7 +63,8 @@ export default class BirthdayPicker extends React.Component {
 
   // Returns the <Picker.Item> values for the years...
   renderYearPickerItems() {
-    var centerYear = this.props.selectedYear;
+    var centerYear = this.startingYear;
+    if (centerYear === 0) { centerYear = (new Date()).getFullYear(); }
     var startYear = centerYear - this.props.yearsBack;
     var endYear = centerYear + this.props.yearsForward;
 
@@ -138,7 +142,7 @@ export default class BirthdayPicker extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container:    { flex: 1, flexDirection: "row", },
+  container:    { flexDirection: "row", },
   monthPicker:  { flex: 3, },
   dayPicker:    { flex: 1, },
   yearPicker:   { flex: 2, },
