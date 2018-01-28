@@ -11,7 +11,7 @@ export default class BirthdayPicker extends React.Component {
     selectedMonth:  (new Date()).getMonth(),        // Month to initialize the picker to
     selectedDay:    (new Date()).getDate(),         // Day to initailize the picker to
     yearsBack:      100,                            // How many years backwards (from starting year) you want to show
-    yearsForward:   100,                            // How many years forwards (from starting year) you want to show
+    yearsForward:   0,                              // How many years forwards (from starting year) you want to show
 
     onYearValueChange: function(year, idx) { },     // Function called when year changes
     onMonthValueChange: function(month, idx) { },   // Function called when month changes
@@ -54,7 +54,7 @@ export default class BirthdayPicker extends React.Component {
 
   // Returns the number of days in the given month...
   getNumDaysInMonth(year, month) {
-    // February is the only day that can change, so if there's no year, assume it has the maximum (29) days...
+    // February is the only month that can change, so if there's no year, assume it has the maximum (29) days...
     return (year == 0 && month == 1) ? 29 : (new Date(year, month + 1, 0).getDate());
   }
 
@@ -67,7 +67,7 @@ export default class BirthdayPicker extends React.Component {
     var years = [];
     for (var i = startYear; i <= endYear; i++) {
       years.push(<Picker.Item label={i.toString()} value={i} key={i} />);
-      if (i == centerYear) { years.push(<Picker.Item label="---" value={0} key={0} />); }
+      if (i == centerYear) { years.push(<Picker.Item label="----" value={0} key={0} />); }
     }
     return years;
   }
