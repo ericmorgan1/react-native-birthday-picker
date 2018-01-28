@@ -5,8 +5,6 @@
 import React from 'react';
 import { StyleSheet, View, Picker, Text, TouchableHighlight, } from 'react-native';
 
-const monthNames = ["January","February","March","April","May","June","July","August","September", "October","November","December"];
-
 export default class BirthdayPicker extends React.Component {
   static defaultProps= {
     selectedYear:   (new Date()).getFullYear(),     // Year to initialize the picker to (set to 0 to not have a year)
