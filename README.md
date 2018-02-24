@@ -20,3 +20,5 @@ import BirthdayPicker from './BirthdayPicker';
   onDayValueChange={(day,i) => console.log("Day was changed to: ", day)}
 />
 ```
+
+<img src="birthday-picker-image.jpg" class="img-fluid" alt="">
